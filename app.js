@@ -1,21 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const taskRoutes = require('./routes/taskRoutes');
-const authRoutes = require('./routes/authRoutes.js');
+const productRoutes = require('./routes/productRoutes');
 const morgan = require('morgan');
 
 // Load environment variables
 dotenv.config();
-
-// Connect to MongoDB
-mongoose.connect(process.env.DB_CONNECTION, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(error => console.error(error));
 
 // Create the Express app
 const app = express();
@@ -26,8 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/tasks', taskRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
 // Error handling
 app.use((error, req, res, next) => {
